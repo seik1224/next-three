@@ -30,17 +30,17 @@ function ResizeHandler() {
 }
 
 export default function MainCanvas() {
-  // 오류나는거 고치기 코드 : 서버 사이드 렌더링(SSR) 환경에서 window 객체에 접근하려고 할 때 발생합니다. SSR에서는 window 객체가 존재하지 않기 때문
-  const [aspect, setAspect] = useState(1);
-  useEffect(() => {
-    const updateAspect = () => {
-      setAspect(window.innerWidth / window.innerHeight);
-    };
+  // 오류나는거 고치기 코드
+  // const [aspect, setAspect] = useState(1);
+  // useEffect(() => {
+  //   const updateAspect = () => {
+  //     setAspect(window.innerWidth / window.innerHeight);
+  //   };
 
-    updateAspect();
-    window.addEventListener("resize", updateAspect);
-    return () => window.removeEventListener("resize", updateAspect);
-  }, []);
+  //   updateAspect();
+  //   window.addEventListener("resize", updateAspect);
+  //   return () => window.removeEventListener("resize", updateAspect);
+  // }, []);
   return (
     <>
       <Canvas
@@ -52,7 +52,7 @@ export default function MainCanvas() {
         shadows={"percentage"}
         camera={{
           fov: 60, // perspective camera의 시야각 설정
-          aspect: aspect, // 카메라 비율 설정
+          aspect: window.innerWidth / window.innerHeight, // 카메라 비율 설정
           near: 0.1, // 카메라의 근접 클리핑 평면 설정
           far: 100, // 카메라의 원거리 클리핑 평면 설정
           position: [5, 5, 5], // 카메라의 초기 위치 설정
@@ -64,10 +64,10 @@ export default function MainCanvas() {
       >
         {/* ResizeHandler 컴포넌트를 Canvas 내부에 추가 */}
         <ResizeHandler />
-        <Lights /> {/* DirectionalLight 생성 */}
-        <Controls /> {/* OrbitControl 생성 */}
+        <Controls />
+        <Lights />
         <Meshes />
-        <GLBModel />
+        {/* <GLBModel /> */}
         {/* <Dancer /> */}
         {/* <PostProcessor /> */}
       </Canvas>

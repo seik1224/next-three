@@ -26,6 +26,7 @@ export const GLBModel = () => {
   return (
     <>
       {/* R3F에서는 간단한 애니메이션에 레이캐스터를 사용하지 않고 표현가능! */}
+      {/* <primitive> 태그는 Three.js 객체를 R3F 장면에 직접 추가하는 데 사용 */}
       <primitive
         onClick={() => {
           setCurrentAnimation((prev) => {
